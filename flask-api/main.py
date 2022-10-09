@@ -3,7 +3,6 @@ from flask import Flask, request, make_response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.declarative import declarative_base
 from functools import wraps
-import uuid
 import jwt
 import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -124,4 +123,4 @@ if __name__ == '__main__':
   with app.app_context():
     db.create_all()
     #Base.metadata.create_all(db.engine)
-  app.run(debug=True)
+  app.run(debug=True, host="0.0.0.0")
