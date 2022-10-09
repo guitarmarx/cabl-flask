@@ -1,0 +1,9 @@
+# from gitignore
+.idea
+__pycache__/
+*.bak
+*.py[cod]
+*$py.class
+.vscode
+.pytest_cache
+venv
