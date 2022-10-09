@@ -50,8 +50,6 @@ class User(db.Model):
   location = db.Column(db.String(255), db.ForeignKey("cabl_location.name"))
   # groups = db.relationship("Group",secondary='cable_user_group')
 
-
-
   def as_dict(self):
     return {"username": self.username, "email": self.email , "location": self.location}
 
@@ -115,8 +113,8 @@ def login():
       {'username': user.username, 'email':user.email, 'location': user.location, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=45)},
       app.config['SECRET_KEY'], "HS256")
 
-    return jsonify({'token': token})
-  return 'error', 409
+    return jsonify({'token': token, 'email': user.email, 'username': user.username, 'location': user.location})
+  return 'error', 401
 
 
 if __name__ == '__main__':
