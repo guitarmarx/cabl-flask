@@ -1,0 +1,6 @@
+flask==2.2.2
+flask-sqlalchemy==3.0.0
+werkzeug==2.2.2
+uuid==1.30
+pyjwt==2.5.0
+mysqlclient==2.1.1

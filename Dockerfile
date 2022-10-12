@@ -7,22 +7,19 @@ ENV PYTHONPATH=/opt/application \
     MYSQL_DATABASE= \
     MYSQL_USER= \
     MYSQL_PASSWORD= \
-    MYSQL_HOST=
+    MYSQL_HOST= \
+    CABL_DEFAULT_LOCATION= \
+    CABL_ADMIN_EMAIL="admin@email.de" \
+    CABL_ADMIN_PASSWORD="admin"
 
-RUN apt update\
+RUN apt update \
     && apt install -y  default-libmysqlclient-dev  gcc
 
-RUN pip install \
-    flask==2.2.2 \
-    flask-sqlalchemy==3.0.0 \
-    werkzeug==2.2.2 \
-    uuid==1.30 \
-    pyjwt==2.5.0 \
-    mysqlclient==2.1.1
-
-
 WORKDIR /opt/application
+COPY requirements.txt /tmp/requirements.txt
 COPY flask-api /opt/application
+
+RUN pip install -r /tmp/requirements.txt
 
 HEALTHCHECK CMD curl -f http://localhost:5000/ || exit 1
 ENTRYPOINT ["python", "main.py"]
